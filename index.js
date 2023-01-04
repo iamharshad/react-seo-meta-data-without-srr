@@ -29,7 +29,7 @@ app.get("/*", (req, res, next) => {
       .replace("__META_DESCRIPTION__", "post.description")
       .replace("__META_OG_IMAGE__", "post.thumbnail");
 
-    res.send(htmlData);
+    return res.send(htmlData);
   });
 });
 
