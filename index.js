@@ -6,9 +6,6 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 const indexPath = path.resolve(__dirname, "build", "index.html");
 
-// static resources should just be served as they are
-app.use(express.static(path.resolve(__dirname, "build"), { maxAge: "30d" }));
-
 // here we serve the index.html page
 app.get("/*", (req, res, next) => {
   fs.readFile(indexPath, "utf8", (err, htmlData) => {
@@ -33,6 +30,9 @@ app.get("/*", (req, res, next) => {
     return res.send(htmlData);
   });
 });
+
+// static resources should just be served as they are
+app.use(express.static(path.resolve(__dirname, "build"), { maxAge: "30d" }));
 
 // listening...
 app.listen(PORT, (error) => {
