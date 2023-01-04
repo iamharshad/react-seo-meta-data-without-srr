@@ -6,32 +6,10 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 const indexPath = path.resolve(__dirname, "build", "index.html");
 
-// here we serve the index.html page
-app.get("/:id", (req, res, next) => {
-  fs.readFile(indexPath, "utf8", (err, htmlData) => {
-    if (err) {
-      console.error("Error during file reading", err);
-      return res.status(404).end();
-    }
-    // get post info
-    const postId = req;
-    console.log(req.url, "sd");
-    // const post = getPostById(postId);
-    // if(!post) return res.status(404).send("Post not found");
+// static resources should just be served as they are
+app.use(express.static(path.resolve(__dirname, "build")));
 
-    // inject meta tags
-    htmlData = htmlData
-      .replace("<title>React App</title>", `<title>ID ROUTE</title>`)
-      .replace("__META_OG_TITLE__", "post.title")
-      .replace("__META_OG_DESCRIPTION__", "post.description")
-      .replace("__META_DESCRIPTION__", "post.description")
-      .replace("__META_OG_IMAGE__", "post.thumbnail");
-
-    res.send(htmlData);
-  });
-});
-
-app.get("/", (req, res, next) => {
+app.get("/*", (req, res, next) => {
   fs.readFile(indexPath, "utf8", (err, htmlData) => {
     if (err) {
       console.error("Error during file reading", err);
@@ -54,9 +32,6 @@ app.get("/", (req, res, next) => {
     res.send(htmlData);
   });
 });
-
-// static resources should just be served as they are
-app.use(express.static(path.resolve(__dirname, "build")));
 
 // listening...
 app.listen(PORT, (error) => {
