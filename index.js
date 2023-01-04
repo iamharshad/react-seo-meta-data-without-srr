@@ -6,11 +6,6 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 const indexPath = path.resolve(__dirname, "build", "index.html");
 
-// static resources should just be served as they are
-app.use(
-  express.static(path.resolve(__dirname, "..", "build"), { maxAge: "30d" })
-);
-
 // listening...
 app.listen(PORT, (error) => {
   if (error) {
@@ -18,6 +13,9 @@ app.listen(PORT, (error) => {
   }
   console.log("listening on " + PORT + "...");
 });
+
+// static resources should just be served as they are
+app.use(express.static(path.resolve(__dirname, "build"), { maxAge: "30d" }));
 
 // here we serve the index.html page
 app.get("/*", (req, res, next) => {
