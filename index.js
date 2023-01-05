@@ -24,7 +24,11 @@ app.get("/*", (req, res, next) => {
     // inject meta tags
     htmlData = htmlData
       .replace("<title>React App</title>", `<title>Home Page</title>`)
-      .replace("__META_OG_TITLE__", "post.title")
+      .replace(
+        `<meta data-react-helmet="true" property="og:title"
+      content="Post a Job - Create an Event - List a Course all at one Place | Docthub.com">`,
+        "post.title"
+      )
       .replace("__META_OG_DESCRIPTION__", "post.description")
       .replace("__META_DESCRIPTION__", "post.description")
       .replace("__META_OG_IMAGE__", "post.thumbnail");

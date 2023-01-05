@@ -36,6 +36,10 @@ function Details() {
 }
 
 function App() {
+  console.log(
+    process.env.REACT_APP_DOCTHUB_WEB_APP_LINK,
+    "DOCTHUB_WEB_APP_LINK"
+  );
   return (
     <BrowserRouter>
       <div className="App">
