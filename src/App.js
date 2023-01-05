@@ -32,6 +32,11 @@ function About() {
 }
 
 function Details() {
+  console.log("TEST");
+  console.log(
+    process.env.REACT_APP_DOCTHUB_WEB_APP_LINK,
+    "DOCTHUB_WEB_APP_LINK"
+  );
   return <h1>Details</h1>;
 }
 
